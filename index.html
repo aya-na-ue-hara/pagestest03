@@ -1,33 +1,25 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログイン</title>
-    <style>
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
-	<script>
-	  const auth0 = await createAuth0Client({
-	    domain: "asahig-b2bplatform-dev.jp.auth0.com",
-	    client_id: "FyZhK4kUR7gFsJ9P5vXubO9rJsXBIneb",
-	    redirect_uri: window.location.origin + "/callback.html"
-	  });
-
-	  const isAuthenticated = await auth0.isAuthenticated();
-
-	  if (!isAuthenticated) {
-	    await auth0.loginWithRedirect();
-	  } else {
-	    window.location.href = "/dashboard.html";  // ログイン済みならトップページへ
-	  }
-	</script>
-    </style>
+  <meta charset="UTF-8" />
+  <title>ログインチェック</title>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+  <script src="auth.js"></script>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1>ログイン</h1>
-            <p>アカウントにアクセスしてください</p>
-        </div>
+  <h1>ログインチェック中...</h1>
+  <script>
+    (async () => {
+      await initAuth0();
+
+      const isAuthenticated = await auth0.isAuthenticated();
+
+      if (!isAuthenticated) {
+        await auth0.loginWithRedirect();
+      } else {
+        window.location.href = "/dashboard.html";
+      }
+    })();
+  </script>
 </body>
 </html>

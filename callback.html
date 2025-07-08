@@ -1,28 +1,24 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>コールバック</title>
-    <style>
-	<script>
-	  const auth0 = await createAuth0Client({
-	    domain: "asahig-b2bplatform-dev.jp.auth0.com",
-	    client_id: "FyZhK4kUR7gFsJ9P5vXubO9rJsXBIneb"
-	  });
-
-	  await auth0.handleRedirectCallback();
-
-	  // トークン取得後、任意のページへリダイレクト
-	  window.location.href = "/dashboard.html";
-	</script>
-    </style>
+  <meta charset="UTF-8" />
+  <title>Auth0 Callback</title>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+  <script src="auth.js"></script>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1>コールバック</h1>
-            <p>コールバック</p>
-        </div>
+  <h1>ログイン処理中...</h1>
+  <script>
+    (async () => {
+      await initAuth0();
+
+      try {
+        await auth0.handleRedirectCallback();
+        window.location.href = "/dashboard.html";
+      } catch (err) {
+        console.error("ログインエラー:", err);
+      }
+    })();
+  </script>
 </body>
 </html>
