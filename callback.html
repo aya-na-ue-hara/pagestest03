@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Auth0 Callback</title>
+  <title>ログイン中...</title>
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
   <script src="auth.js"></script>
 </head>
@@ -11,13 +11,8 @@
   <script>
     (async () => {
       await initAuth0();
-
-      try {
-        await auth0.handleRedirectCallback();
-        window.location.href = "/dashboard.html";
-      } catch (err) {
-        console.error("ログインエラー:", err);
-      }
+      await auth0.handleRedirectCallback();
+      window.location.href = "/pagestest03/dashboard.html";
     })();
   </script>
 </body>
