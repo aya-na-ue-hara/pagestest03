@@ -3,9 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <title>ダッシュボード</title>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+  <script src="auth.js"></script>
 </head>
 <body>
   <h1>ログイン成功 🎉</h1>
   <p>ここはログイン後のトップページです。</p>
+
+  <button id="logout">ログアウト</button>
+
+  <script>
+    (async () => {
+      await initAuth0();
+
+      document.getElementById("logout").addEventListener("click", () => {
+        auth0.logout({
+          returnTo: window.location.origin + "/pagestest03/index.html"
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
